@@ -1,0 +1,35 @@
+v1.4.1 -> v1.4.2
+----------------
+- Previously, I was not doing a "swap" on a VC hit if there was still room in the VC.
+Now, I do the swap even if there is extra space.
+- Fixed a bug where prefetch hits were counting towards useful prefetches.
+
+v1.4 -> v1.4.1
+--------------
+- Rolled back a dumb mistake I made in 1.4
+
+v1.3 -> v1.4
+------------
+- Fixed a bug which occurred when prefetching in to a set with no valid blocks,
+or where the LRU timestamp is 0. Make sure to never make LRU timestamp negative!
+
+
+v1.2 -> v1.3
+------------
+- Fixed a bug where I sometimes counted write_backs when moving blocks from VC to L1.
+
+
+v1.1 -> v1.2
+------------
+- AAT now calculated with VC miss rate not L1 miss rate.
+- Prefetched insertions now only consider valid blocks when calculating LRU timestamp.
+- Fixed a bug where I accidentally double-counted blocks for bytes_transferred.
+- Fixed some logic related to write backs.
+
+
+v1.0 -> v1.1
+------------
+- Prefetch insertions are now LRU instead of MRU
+- Fixed a bug with bytes_transferred where it wouldn't count for non-prefetches
+- Prefetch hits no longer promote block to MRU
+- Prefetches now also affect bytes_transferred even if they hit in the cache
